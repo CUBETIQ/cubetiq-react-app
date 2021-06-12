@@ -1,10 +1,10 @@
-import React from 'react'
+import AppProvider from '@/provider/AppProvider'
 import RouterView from '../routes'
-import './App.css'
+import './App.less'
 
 const App = () => {
   return (
-    <RouterView />
+    <AppProvider><RouterView /></AppProvider>
   )
 }
 

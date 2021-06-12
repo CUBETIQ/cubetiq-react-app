@@ -7,6 +7,7 @@ CUBETIQ React App Template for general use in react application.
 - Create React App: 4.0.3
 - React: 17.0.0
 - TypeScript: 4.1.2
+- Craco: 6.1.2 | Craco less: 1.17.1
 
 # Contributors
 
