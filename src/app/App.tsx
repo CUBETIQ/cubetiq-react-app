@@ -1,11 +1,10 @@
 import React from 'react'
+import RouterView from '../routes'
 import './App.css'
 
 const App = () => {
   return (
-    <div className="App">
-      <h1>CUBETIQ</h1>
-    </div>
+    <RouterView />
   )
 }
 
