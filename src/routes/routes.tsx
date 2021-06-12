@@ -1,36 +1,18 @@
-import { RouteProps } from 'react-router-dom'
-import About from '../pages/About'
-import Home from '../pages/Home'
-import RouteTypes from './types'
-
-interface Authority {
-    authority?: string | undefined
-    strict?: boolean | undefined
-    with?: Authority | undefined
-}
-
-interface AuthorityProps {
-    authorities?: Authority | string[] | string | undefined
-    strictAuthority?: boolean | undefined
-}
-
-interface CustomRouteProps extends RouteProps, AuthorityProps {
-    key: string
-}
-
-export interface MenuProps {
-    icon: any
-    label?: string | undefined
-}
-
-export interface SideMenuRouteProps extends CustomRouteProps, MenuProps {}
-
-export interface SideSubMenuProps extends MenuProps {
-    key?: string | undefined
-    subMenus: SideSubMenuProps[]
-}
+import About from '@/pages/About'
+import NotFound from '@/pages/Error/404'
+import Home from '@/pages/Home'
+import Login from '@/pages/Login'
+import Profile from '@/pages/Profile'
+import { CustomRouteProps } from '@/routes/interfaces'
+import { RouteTypes } from '@/routes/types'
 
 const routes: CustomRouteProps[] = [
+    // Auth
+    {
+        key: 'login',
+        path: RouteTypes.LOGIN,
+        component: () => <Login />,
+    },
     {
         key: 'home',
         exact: true,
@@ -42,8 +24,20 @@ const routes: CustomRouteProps[] = [
         path: RouteTypes.ABOUT,
         component: () => <About />,
     },
+    {
+        exact: true,
+        key: 'profile',
+        path: RouteTypes.PROFILE,
+        component: () => <Profile />,
+        withAuthority: true,
+    },
+
+    // Errors
+    {
+        key: 'notfound',
+        path: RouteTypes.ERROR_404,
+        component: () => <NotFound />,
+    },
 ]
 
-const menus: (SideMenuRouteProps | SideSubMenuProps)[] = []
-
-export { routes, menus }
+export { routes }

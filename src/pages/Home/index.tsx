@@ -2,8 +2,8 @@ import './index.less'
 
 export default function Home() {
   return (
-    <div className="home-title">
-      <h1>Home</h1>
+    <div>
+      <h1 className="home-title">Home</h1>
     </div>
   )
 }
