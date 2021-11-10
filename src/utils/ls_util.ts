@@ -5,3 +5,7 @@ export const setStorage = (key: string, value?: any) => {
 export const getStorage = (key: string, defaultValue?: string): (string | undefined | null) => {
     return localStorage.getItem(key) ?? defaultValue
 }
+
+export const clearStorage = () => {
+    return localStorage.clear()
+}

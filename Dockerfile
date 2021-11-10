@@ -2,11 +2,12 @@
 FROM cubetiq/calpine-node AS builder
 
 RUN apk update && \
+    # For build commit hash in "process.env.COMMIT_ID"
+    apk add git && \
     apk add tzdata && \
     cp /usr/share/zoneinfo/Asia/Phnom_Penh /etc/localtime && \
-    echo "Asia/Phnom_Penh" > /etc/timezone && \
-    apk del tzdata
-    
+    echo "Asia/Phnom_Penh" > /etc/timezone
+
 WORKDIR /app
 COPY package.json ./
 # Set custom registry for npm registry (from cubetiq local server)
@@ -14,6 +15,10 @@ RUN yarn config set registry https://r.ctdn.net
 RUN yarn
 COPY . .
 RUN yarn build
+
+# Clean up unused packages
+RUN apk del tzdata && \
+    apk del git
 
 # Build production image
 FROM nginx:alpine
