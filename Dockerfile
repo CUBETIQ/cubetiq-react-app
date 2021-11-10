@@ -1,6 +1,12 @@
 # Build application
 FROM cubetiq/calpine-node AS builder
 
+RUN apk update && \
+    apk add tzdata && \
+    cp /usr/share/zoneinfo/Asia/Phnom_Penh /etc/localtime && \
+    echo "Asia/Phnom_Penh" > /etc/timezone && \
+    apk del tzdata
+    
 WORKDIR /app
 COPY package.json ./
 # Set custom registry for npm registry (from cubetiq local server)
