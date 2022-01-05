@@ -1,57 +1,65 @@
-import About from '@/pages/About'
-import NotFound from '@/pages/Error/404'
-import Home from '@/pages/Home'
-import Info from '@/pages/Info'
-import Login from '@/pages/Login'
-import Profile from '@/pages/Profile'
-import Reset from '@/pages/Reset'
-import { CustomRouteProps } from '@/routes/interfaces'
-import { RouteTypes } from '@/routes/types'
+import React from 'react'
+import { Reset, Home, Profile, Info } from '@/pages'
 
-const routes: CustomRouteProps[] = [
-    // Auth
+export interface Authority {
+    privileges?: string | Array<string>
+    // if true => AND | is false => OR (related to privileges)
+    // compare privileges of reponse and privileges above
+    strict?: boolean
+    // if true, hide or not render. Else show but disabled (element/children)
+    hideNoPrivilege?: boolean
+}
+
+export interface RouteObj {
+    path: string
+    component: () => React.ReactNode
+    exact?: boolean
+    key: string
+    headerLabel?: string
+    authority?: Authority
+}
+
+export interface SideMenuRouteObj extends RouteObj {
+    icon?: any
+    label: string
+}
+
+export interface SideSubMenuObj {
+    icon: any
+    label: string
+    key: string
+    subMenus: SideMenuRouteObj[]
+}
+
+const sideMenuRouteObjs: (SideMenuRouteObj | SideSubMenuObj)[] = [
     {
-        key: 'login',
-        path: RouteTypes.LOGIN,
-        component: () => <Login />,
-    },
-    {
-        key: 'home',
-        exact: true,
-        path: RouteTypes.HOME,
         component: () => <Home />,
+        path: '/',
+        key: 'home',
+        headerLabel: '',
+        label: 'Home',
+        // authority: {
+        //   privileges: ['ADMIN', 'USER'],
+        //   hideNoPrivilege: false,
+        //   strict: true,
+        // }
     },
     {
-        key: 'about',
-        path: RouteTypes.ABOUT,
-        component: () => <About />,
-    },
-    {
-        exact: true,
-        key: 'info',
-        path: RouteTypes.INFO,
-        component: () => <Info />,
-    },
-    {
-        exact: true,
-        key: 'reset',
-        path: RouteTypes.RESET,
-        component: () => <Reset />,
-    },
-    {
-        exact: true,
-        key: 'profile',
-        path: RouteTypes.PROFILE,
         component: () => <Profile />,
-        withAuthority: true,
-    },
-
-    // Errors
-    {
-        key: 'notfound',
-        path: RouteTypes.ERROR_404,
-        component: () => <NotFound />,
+        path: '/profile',
+        key: 'profile',
+        headerLabel: '',
+        label: 'Profile',
     },
 ]
 
-export { routes }
+const routes: RouteObj[] = [
+    {
+        path: '/reset',
+        component: () => <Reset />,
+        key: 'reset',
+        headerLabel: 'Reset',
+    },
+]
+
+export { sideMenuRouteObjs, routes as default }

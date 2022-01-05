@@ -1,7 +1,7 @@
 import { RouteTypes } from '@/routes/types'
 import { clearStorage } from '@/utils/ls_util'
 import { useEffect } from 'react'
-import { Redirect } from 'react-router'
+import { Navigate } from 'react-router'
 
 const Reset = () => {
     const clearAllCaches = () => {
@@ -17,7 +17,7 @@ const Reset = () => {
         clearAllCaches()
     }, [])
 
-    return <Redirect to={RouteTypes.HOME} />
+    return <Navigate to={RouteTypes.HOME} />
 }
 
 export default Reset

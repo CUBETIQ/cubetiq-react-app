@@ -10,10 +10,12 @@ export interface AuthorityProps {
     withAuthority?: boolean | undefined
     authorities?: Authority | string[] | string | undefined
     strictAuthority?: boolean | undefined
+    hideNoPrivilege?: boolean | undefined
 }
 
 export interface CustomRouteProps extends RouteProps, AuthorityProps {
     key: string
+    location?: string | undefined
 }
 
 export interface MenuProps {
