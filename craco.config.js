@@ -31,14 +31,11 @@ module.exports = {
         plugins: {
             add: [
                 new webpack.DefinePlugin({
-                    'process.env': {
-                        PACKAGE_NAME: `"${npmPackage.name}"`,
-                        PACKAGE_VERSION:
-                            '"' + npmPackage.version + '-' + dateVersion + '"',
-                        BUILD_NUMBER: '"' + uuidv4() + '"',
-                        BUILD_DATE: '"' + today.toLocaleString() + '"',
-                        COMMIT_ID: '"' + fetchGitCommitId() + '"',
-                    },
+                    'process.env.PACKAGE_NAME': `"${npmPackage.name}"`,
+                    'process.env.PACKAGE_VERSION': `"${dateVersion}"`,
+                    'process.env.BUILD_NUMBER': `"${uuidv4()}"`,
+                    'process.env.BUILD_DATE': `"${today.toLocaleString()}"`,
+                    'process.env.COMMIT_ID': `"${fetchGitCommitId()}"`,
                 }),
             ],
         },
